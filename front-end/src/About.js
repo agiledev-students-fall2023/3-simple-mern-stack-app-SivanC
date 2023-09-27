@@ -1,4 +1,5 @@
 import './About.css'
+import meSrc from './resources/me.png'
 
 /**
  * A React component that represents the About Us page of the app.
@@ -7,6 +8,7 @@ const About = props => {
     return (
         <>
             <h1>About Us</h1>
+            <img src={meSrc}/>
             <p>Hi! My name is Sivan. I'm a senior computer science student
                 taking Agile Software Development, and this is my full-stack
                 MERN practice application.</p><br/>
