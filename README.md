@@ -9,14 +9,7 @@ This is a so-called "monorepo" - a single repository containing all the componen
 To complete this exercise:
 
 1. run this app locally on your own machine (instructions for launching the app below)
-1. add a new page to the app called "About Us", where you have written a few paragraphs about yourself and included a photo of yourself (this does not require any modifications to the back-end code or database).
-1. share a public link to your local instance of the app below (see `ngrok` instructions below for generating a public link)
-
-When you have completed the exercise, leave your local copy of the app running, enter the public link to it here, and push your code changes to GitHub:
-
-```
-https://6d2f-2603-7000-3e00-38bf-2d12-7647-fd9e-ab3.ngrok-free.app/
-```
+2. add a new page to the app called "About Us", where you have written a few paragraphs about yourself and included a photo of yourself. The page content, including all text and the URL to the image must be retrieved as `JSON` data from a new route you create on the back-end.
 
 ## How to launch the app
 
@@ -72,12 +65,24 @@ Create a public URL that points to your front-end:
 
 ## How the project was intiially set up from scratch...
 
+### Let others view your app
+
+When running locally on your machine, others can't access the app. To give temporary access to others to run the app on your machine:
+
+- install [ngrok](https://ngrok.com/download)
+- run the command, `ngrok http 4000`
+
+ngrok will then spit out a temporary URL that you can share with others to give them access to the app running on your machine
+
+## How the project was intiially set up from scratch...
+
 While you don't need to do this in order to simply run this app, here's how the project was intially set up
 
 - `mkdir my_project` to create project folder
 - `cd my_project` to go into the folder
 
 ### Initial set up of React.js front end
+Initial set up of React.js front end:
 
 - go into the main project folder and...
 - `npx create-react-app front-end` - to create a boilerplate React project for the front-end
