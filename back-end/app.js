@@ -11,6 +11,7 @@ app.use(cors()) // allow cross-origin resource sharing
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+app.use(express.static('public'))
 
 // connect to database
 mongoose
@@ -20,7 +21,8 @@ mongoose
 
 // load the dataabase models we want to deal with
 const { Message } = require('./models/Message')
-const { User } = require('./models/User')
+const { User    } = require('./models/User')
+const { About   } = require('./models/About')
 
 // a route to handle fetching all messages
 app.get('/messages', async (req, res) => {
@@ -76,6 +78,37 @@ app.post('/messages/save', async (req, res) => {
       status: 'failed to save the message to the database',
     })
   }
+})
+
+// a route to retrieve information for the about page
+app.get('/about', async (req, res) => {
+    try {
+        about = await About.create({
+            text: [ 
+                "Hi! My name is Sivan. I'm a senior computer science student\
+                taking Agile Software Development, and this is my full-stack MERN\
+                practice application.",
+                "Some facts about me: I'm from the west coast and I love when it\
+                rains. I have a cat named Sushi at home and I volunteer at a cat\
+                shelter over here. My interests include math, computer science,\
+                Chinese language and literature, and video games.",
+                "After graduating, I hope to move back to my home city and work as\
+                a software engineer for a while. I would love to travel to Asia\
+                (especially China) for an extended period of time at some point.",
+            ]
+        }) 
+        return res.json({
+            about: about,
+            img: "/me.png",
+            status: 'OK',
+        })
+    } catch (err) {
+        console.error(err)
+        return res.status(400).json({
+            error: err,
+            status: 'failed to retrieve about page text from database',
+        })
+    }
 })
 
 // export the express app we created to make it available to other modules
