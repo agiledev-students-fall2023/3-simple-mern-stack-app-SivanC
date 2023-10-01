@@ -11,6 +11,7 @@ app.use(cors()) // allow cross-origin resource sharing
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+app.use(express.static('public'))
 
 // connect to database
 mongoose
@@ -82,7 +83,7 @@ app.post('/messages/save', async (req, res) => {
 // a route to retrieve information for the about page
 app.get('/about', async (req, res) => {
     try {
-        const about = await About.create({
+        about = await About.create({
             text: [ 
                 "Hi! My name is Sivan. I'm a senior computer science student\
                 taking Agile Software Development, and this is my full-stack MERN\
@@ -95,9 +96,10 @@ app.get('/about', async (req, res) => {
                 a software engineer for a while. I would love to travel to Asia\
                 (especially China) for an extended period of time at some point.",
             ]
-        })
+        }) 
         return res.json({
             about: about,
+            img: "/me.png",
             status: 'OK',
         })
     } catch (err) {
